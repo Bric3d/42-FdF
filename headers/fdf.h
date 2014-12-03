@@ -6,7 +6,7 @@
 /*   By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 11:13:14 by bbecker           #+#    #+#             */
-/*   Updated: 2014/12/03 17:47:31 by bbecker          ###   ########.fr       */
+/*   Updated: 2014/12/03 18:40:44 by bbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <stdio.h>
 
 
-typedef struct	s_lnu;
+typedef struct	s_lnu
 {
 	struct s_lnu	*nxt;
 	struct s_lnu	*fst;
@@ -35,7 +35,7 @@ typedef struct	s_line
 	char			*line;
 }				t_line;
 
-typedef struct	s_nfo;
+typedef struct	s_nfo
 {
 	int		**tab;
 	t_lnu	*lnu;
