@@ -26,7 +26,6 @@ typedef struct	s_lnu
 	struct s_lnu	*fst;
 	int				nu;
 	int				llin;
-	int				total;
 }				t_lnu;
 
 typedef struct	s_line
@@ -40,7 +39,17 @@ typedef struct	s_nfo
 {
 	int		**tab;
 	t_lnu	*lnu;
+	int		maxcol;
+	int		linenu;
 }				t_nfo;
+
+typedef struct 	s_pts
+{
+	int	x1;
+	int y1;
+	int x2;
+	int y2;
+}				t_pts;
 
 typedef struct	s_env
 {

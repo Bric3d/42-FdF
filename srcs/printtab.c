@@ -36,7 +36,7 @@ void	ft_printinttab(t_nfo *nfo)
 	x = 0;
 	tab = nfo->tab;
 	lnu = nfo->lnu;
-	while (x < lnu->total)
+	while (x < nfo->linenu)
 	{
 		ft_print_line(tab[x], lnu->llin);
 		if (lnu->nxt)

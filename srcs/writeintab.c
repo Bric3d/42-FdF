@@ -12,6 +12,21 @@
 
 #include "fdf.h"
 
+int		ft_calcolmax(t_lnu *lnu)
+{
+	int max;
+
+	lnu = lnu->fst;
+	max = 0;
+	while (lnu)
+	{
+		if (lnu->llin > max)
+			max = lnu->llin;
+		lnu = lnu->nxt;
+	}
+	return (max);
+}
+
 t_nfo	*ft_makeinttab(t_line *line)
 {
 	int		i;
@@ -29,8 +44,8 @@ t_nfo	*ft_makeinttab(t_line *line)
 	if (!tab || !nfo)
 		exit (-1);
 	lnu = ft_createlnulist(i);
-	c = ft_writeintab(line, tab, lnu, c);
-	ft_write_total(c, lnu);
+	nfo->linenu = ft_writeintab(line, tab, lnu, c);
+	nfo->maxcol = ft_calcolmax(lnu->fst);
 	nfo->tab = tab;
 	nfo->lnu = lnu->fst;
 	return (nfo);
@@ -47,15 +62,6 @@ int		ft_writeintab(t_line *line, int **tab, t_lnu *lnu, int c)
 			line = line->nxt;
 	}
 	return (c);
-}
-
-void	ft_write_total(int c, t_lnu *lnu)
-{
-	while (lnu)
-	{
-		lnu->total = c;
-		lnu = lnu->nxt;
-	}
 }
 
 int		*ft_strsplitnstuff(t_lnu *lnu, t_line *line)
