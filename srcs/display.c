@@ -11,6 +11,28 @@ int     ft_color(int z)
         return (0xffffff);
 }
 
+
+void    ft_putpxl(t_env *env, int x, int y, int color)
+{
+    int size;
+    int z;
+    int w;
+
+    size = 2;
+    z = 0;
+
+    while (z < size)
+    {
+        w = 0;
+        while (w < size)
+        {
+            mlx_pixel_put(env->init, env->win, x + w, y + z, color);
+            w++;
+        }
+        z++;
+    }
+}
+
 void    ft_putverb(t_pts *pts, t_env *env, int z)
 {
     int y;
@@ -177,7 +199,7 @@ void    ft_putoct4(t_env *env, t_pts *pts, int z)
         if ((e = e + dy) < 0)
         {
             pts->y1++;
-            e = e + dy;
+            e = e + dx;
         }
     }
 }
@@ -296,7 +318,7 @@ void    ft_chos356(t_env *env, t_pts *pts, int z)
 }
 
 void    ft_traceseg(t_env *env, t_pts *pts, int z)
-{
+{0
     int dx;
     int dy;
 
@@ -316,20 +338,20 @@ void    ft_traceseg(t_env *env, t_pts *pts, int z)
         }
         else if (dx < 0)
         {
-            if ((dy = y2 - y2) != 0)
+            if ((dy = pts->y2 - pts->y1) != 0)
             {
                 if (dy > 0)
                     ft_chos243(env, pts, z);
                 else if (dy < 0 && dx <0)
                     ft_chos356(env, pts, z);
             }
-            else if (dy == 0 && dx < 0
-                ft_puthorg(env, pts, z);
+            else if (dy == 0 && dx < 0)
+                ft_puthorg(pts, env, z);
         }
     }
     else if (dx == 0)
     {
-        if ((dy - pts->y2 - pts->y1) != 0)
+        if ((dy = pts->y2 - pts->y1) != 0)
         {
             if (dy > 0)
                 ft_putverb(pts, env, z);
@@ -337,27 +359,7 @@ void    ft_traceseg(t_env *env, t_pts *pts, int z)
                 ft_putverh(pts, env, z);
         }
     }
-}
-
-void    ft_putpxl(t_env *env, int x, int y, int color)
-{
-    int size;
-    int z;
-    int w;
-
-    size = 2;
-    z = 0;
-
-    while (z < size)
-    {
-        w = 0;
-        while (w < size)
-        {
-            mlx_pixel_put(env->init, env->win, x + w, y + z, color);
-            w++;
-        }
-        z++;
-    }
+    free(pts);
 }
 
 void    ft_print_vert(int x0, int y0, int x1, int y1, t_env *env, int color)
@@ -367,9 +369,9 @@ void    ft_print_vert(int x0, int y0, int x1, int y1, t_env *env, int color)
         ft_putpxl(env, x0++, y0, color);
 }
 
-t_pts    *ft_putxy(int x1, int y1, int x2, int y2)
+t_pts   *ft_putxy(int x1, int y1, int x2, int y2)
 {
-    t_pts *pts
+    t_pts *pts;
 
     pts = (t_pts *)malloc(sizeof(t_pts));
     pts->x1 = x1;
@@ -379,15 +381,49 @@ t_pts    *ft_putxy(int x1, int y1, int x2, int y2)
     return (pts);
 }
 
+void    ft_initseg(t_env *env, int x, int y, t_lnu *lnu)
+{
+    int     **tab;
+    int     m;
+    int     p;
+    t_pts   *pts;
+
+    p = 25;
+    m = 100;
+    tab = env->nfo->tab;
+    ft_putendl("Hey1");
+    if (x > 0)
+    {
+        pts = ft_putxy(x * p + m, y * p + m - tab[y][x], (x - 1) * p + m, y * p + m - tab[y][x - 1]);
+        ft_traceseg(env, pts, (tab[y][x] + tab[y][x - 1]) / 2);
+    }
+    ft_putendl("Hey2");
+    if (y > 0)
+    {
+        pts = ft_putxy(x * p + m, y * p + m - tab[y][x], x * p + m, (y - 1) * p + m - tab[y - 1][x]);
+        ft_traceseg(env, pts, (tab[y][x] + tab[y - 1][x]) / 2);
+    }
+    ft_putendl("Hey3");
+    if (x + 1 < lnu->llin)
+    {
+        pts = ft_putxy(x * p + m, y * p + m - tab[y][x], (x + 1) * p + m - tab[y][x + 1], y * p + m);
+        ft_traceseg(env, pts, (tab[y][x] + tab[y][x + 1]) / 2);
+    }
+    ft_putendl("Hey4");
+    if (y + 1 < env->nfo->linenu)
+    {
+        pts = ft_putxy(x * p + m, y * p + m - tab[y][x], x * p + m, (y + 1) * p + m - tab[y + 1][x]);
+        ft_traceseg(env, pts, (tab[y][x] + tab[y + 1][x]) / 2);
+    }
+}
+
 void    ft_printpixels(t_env *env)
 {
     int     **tab;
     t_lnu   *lnu;
     int     x;
     int     y;
-    t_pts   *pts;
 
-    ft_traceseg(t_env *env, t_pts *pts, int z)
     y = 0;
     lnu = env->nfo->lnu;
     tab = env->nfo->tab;
@@ -398,9 +434,9 @@ void    ft_printpixels(t_env *env)
         {
             ft_putnbr(tab[y][x]);
             ft_putchar(' ');
+            ft_initseg(env, x, y, lnu);
             if (tab[y][x] != 0)
-                ft_putpxl(env, x * 25 + 100, y * 25 + 100 -
-                 tab[y][x], 0xff0000);
+                ft_putpxl(env, x * 25 + 100, y * 25 + 100 - tab[y][x], 0xff0000);
             else
             {
                 ft_putpxl(env, x * 25 + 100, y * 25 + 100, 0xffffff);

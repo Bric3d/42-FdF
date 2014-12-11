@@ -29,14 +29,9 @@ int		main(int argc, char **argv)
 
 	if (argc > 1)
 	{
-		if (ft_checkextension(argv[1], ".fdf") != 1)
-			ft_putendl_fd("Invalid file type, please use a .fdf map", 2);
-		else
-		{
-			fd = ft_openfile(argv[1]);
-			nfo = ft_read_file(fd);
-			display(nfo);
-		}
+		fd = ft_openfile(argv[1]);
+		nfo = ft_read_file(fd);
+		display(nfo);
 	}
 	return (0);
 }
