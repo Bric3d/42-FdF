@@ -14,15 +14,19 @@
 
 int		ft_calcolmax(t_lnu *lnu)
 {
-	int max;
+	int		max;
+	t_lnu	*prv;
 
 	lnu = lnu->fst;
 	max = 0;
 	while (lnu)
 	{
+		prv = lnu;
 		if (lnu->llin > max)
 			max = lnu->llin;
 		lnu = lnu->nxt;
+		if (lnu)
+			lnu->prv = prv;
 	}
 	return (max);
 }

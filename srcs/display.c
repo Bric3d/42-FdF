@@ -7,10 +7,12 @@ int     ft_color(int z)
         return (0x0000ff);
     if (z > 0 && z < 10)
         return (0xF7DF7D);
-    if (z > 9 && z < 30)
+    if (z > 9 && z < 60)
         return (0x21B84E);
-    if (z > 29 && z < 60)
+    if (z > 59 && z < 100)
         return (0x21B84E);
+    if (z > 99 && z < 160)
+        return (0x855C48);
     else
         return (0xffffff);
 }
@@ -21,7 +23,11 @@ void    ft_putpxl(t_env *env, int x, int y, int color)
     int size;
     int z;
     int w;
+    int xa;
+    int ya;
 
+    ya = env->y;
+    xa = env->x;
     size = 2;
     z = 0;
 
@@ -30,7 +36,7 @@ void    ft_putpxl(t_env *env, int x, int y, int color)
         w = 0;
         while (w < size)
         {
-            mlx_pixel_put(env->init, env->win, x + w + 100, y + z + 100, color);
+            mlx_pixel_put(env->init, env->win, x + w + xa, y + z + ya, color);
             w++;
         }
         z++;
@@ -51,14 +57,14 @@ t_pts   *ft_putxy(int x1, int y1, int x2, int y2)
 
 void    ft_bresenham(t_env *env, t_pts *pts, int height)
 {
-    int        a[5];
-    int        e2;
+    int a[5];
+    int e2;
 
     a[0] = ft_abs(pts->x2 - pts->x1);
     a[1] = pts->x1 < pts->x2 ? 1 : -1;
     a[2] = ft_abs(pts->y2 - pts->y1);
     a[3] = pts->y1 < (pts->y2) ? 1 : -1;
-    a[4] = (a[0] > a[2] ? a[0] : -a[2]) / 2;
+    a[4] = (a[0] > a[2] ? a[0] : -a[2]) * 0.5;
     while (1)
     {
         ft_putpxl(env, pts->x1, pts->y1, ft_color(height));
@@ -89,37 +95,32 @@ void    ft_initseg(t_env *env, int x, int y, t_lnu *lnu)
     tab = env->nfo->tab;
     if (x > 0)
     {
-        pts = ft_putxy(x * p, y * p - tab[y][x], (x - 1) * p, y * p - tab[y][x - 1]);
-        ft_bresenham(env, pts, (tab[y][x] + tab[y][x - 1]) / 2);
+        pts = ft_putxy(x * p + tab[y][x] * 0.5, y * p - tab[y][x], (x - 1) * p + tab[y][x - 1] * 0.5, y * p - tab[y][x - 1]);
+        ft_bresenham(env, pts, (tab[y][x] + tab[y][x - 1]) * 0.5);
     }
     if (y > 0)
     {
-        pts = ft_putxy(x * p, y * p - tab[y][x], x * p, (y - 1) * p - tab[y - 1][x]);
-        ft_bresenham(env, pts, (tab[y][x] + tab[y - 1][x]) / 2);
+        pts = ft_putxy(x * p + tab[y][x] * 0.5, y * p - tab[y][x], x * p + tab[y - 1][x] * 0.5, (y - 1) * p - tab[y - 1][x]);
+        ft_bresenham(env, pts, (tab[y][x] + tab[y - 1][x]) * 0.5);
     }
 }
 
 int     ft_printpixels(t_env *env)
 {
-    int     **tab;
     t_lnu   *lnu;
     int     x;
     int     y;
 
     y = 0;
     lnu = env->nfo->lnu;
-    tab = env->nfo->tab;
     while (y < env->nfo->linenu)
     {
         x = 0;
         while(x < lnu->llin)
         {
-            ft_putnbr(tab[y][x]);
-            ft_putchar(' ');
             ft_initseg(env, x, y, lnu);
             x++;
         }
-        ft_putchar('\n');
         y++;
         if (lnu->nxt)
             lnu = lnu->nxt;
@@ -136,6 +137,8 @@ void    ft_displaysize(t_env *env)
     else
         max = env->nfo->linenu;
     env->p = 1000 / max;
+    env->x = 100;
+    env->y = 100;
 }
 
 void    ft_replay(t_env *env)
@@ -144,21 +147,32 @@ void    ft_replay(t_env *env)
     ft_printpixels(env);
 }
 
-int	    ft_key_hook(int keycode, t_env *env)
+void    ft_move(t_env *env, int kc)
 {
-    env = (t_env *)env;
-    ft_putnbr(keycode);
-    ft_putchar('\n');
-    if (keycode == 65307)
+    if (kc == 65362)
+        env->y = env->y + env->p;
+    if (kc == 65364)
+        env->y = env->y - env->p;
+    if (kc == 65361)
+        env->x = env->x + env->p;
+    if (kc == 65363)
+        env->x = env->x - env->p;
+}
+
+int	    ft_key_hook(int kc, t_env *env)
+{
+    //ft_putnbr(kc);
+    //ft_putchar('\n');
+    if (kc == 65307)
         exit (0);
-    if (keycode == 45 || keycode == 65453)
+    if (kc == 45 || kc == 65453 || kc == 61 || kc == 65451
+        || kc == 65362 || kc == 65364 || kc == 65361 || kc == 65363)
     {
-        env->p--;
-        ft_replay(env);
-    }
-    if (keycode == 61 || keycode == 65451)
-    {
-        env->p++;
+        if (kc == 45 || kc == 65453)
+            env->p--;
+        if (kc == 61 || kc == 65451)
+            env->p++;
+        ft_move(env, kc);
         ft_replay(env);
     }
     return (0);
@@ -174,6 +188,7 @@ void    display(t_nfo *nfo)
     env->init = mlx_init();
     ft_displaysize(env);
     env->win = mlx_new_window(env->init, 1100, 1100, "FdF");
+    mlx_hook(env->win, 2, 3, ft_key_hook, env);
     mlx_key_hook(env->win, ft_key_hook, env);
     mlx_expose_hook(env->win, ft_printpixels, env);
     mlx_loop(env->init);
