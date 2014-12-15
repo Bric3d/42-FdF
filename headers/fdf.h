@@ -23,6 +23,7 @@
 typedef struct	s_lnu
 {
 	struct s_lnu	*nxt;
+	struct s_lnu	*prv;
 	struct s_lnu	*fst;
 	int				nu;
 	int				llin;
@@ -45,10 +46,10 @@ typedef struct	s_nfo
 
 typedef struct 	s_pts
 {
-	int	x1;
-	int y1;
-	int x2;
-	int y2;
+	double	x1;
+	double	y1;
+	double	x2;
+	double	y2;
 }				t_pts;
 
 typedef struct	s_env
@@ -56,6 +57,12 @@ typedef struct	s_env
 	void	*init;
 	void	*win;
 	t_nfo	*nfo;
+	int		p;
+	int		x;
+	int 	y;
+	double	cu;
+	int		size;
+	int		pxsize;
 }				t_env;
 /*
 ** error.c
