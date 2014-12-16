@@ -73,8 +73,10 @@ TOMAKE =	$(F)ft_atoi.c		\
 			$(F)ft_putendl.c	\
 			$(F)ft_putendl_fd.c	\
 			$(F)ft_putnbr_fd.c	\
-			$(F)ft_putstr_fd.c
+			$(F)ft_putstr_fd.c	\
+			$(F)ft_abs.c
 TOLIB	=	ft_atoi.o			\
+			ft_abs.o			\
 			ft_isalpha.o		\
 			ft_isprint.o		\
 			ft_memcmp.o			\
@@ -141,7 +143,7 @@ $(NAME):
 	ranlib $(NAME)
 
 clean :
-	/bin/rm -rf $(TOLIB) 
+	/bin/rm -rf $(TOLIB)
 
 fclean: clean
 	/bin/rm -f $(NAME)

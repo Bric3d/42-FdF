@@ -6,7 +6,7 @@
 /*   By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 11:13:14 by bbecker           #+#    #+#             */
-/*   Updated: 2014/12/08 15:45:47 by bbecker          ###   ########.fr       */
+/*   Updated: 2014/12/16 18:25:37 by bbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,54 +20,55 @@
 # include <stdio.h>
 # include "get_next_line.h"
 
-typedef struct	s_lnu
+typedef struct		s_lnu
 {
 	struct s_lnu	*nxt;
 	struct s_lnu	*prv;
 	struct s_lnu	*fst;
 	int				nu;
 	int				llin;
-}				t_lnu;
+}					t_lnu;
 
-typedef struct	s_line
+typedef struct		s_line
 {
 	struct s_line	*nxt;
 	struct s_line	*first;
 	char			*line;
-}				t_line;
+}					t_line;
 
-typedef struct	s_nfo
+typedef struct		s_nfo
 {
-	int		**tab;
-	t_lnu	*lnu;
-	int		maxcol;
-	int		linenu;
-}				t_nfo;
+	int				**tab;
+	t_lnu			*lnu;
+	int				maxcol;
+	int				linenu;
+}					t_nfo;
 
-typedef struct 	s_pts
+typedef struct		s_pts
 {
-	double	x1;
-	double	y1;
-	double	x2;
-	double	y2;
-}				t_pts;
+	double			x1;
+	double			y1;
+	double			x2;
+	double			y2;
+}					t_pts;
 
-typedef struct	s_env
+typedef struct		s_env
 {
-	void	*init;
-	void	*win;
-	t_nfo	*nfo;
-	int		p;
-	int		x;
-	int 	y;
-	double	cu;
-	int		size;
-	int		pxsize;
-}				t_env;
+	void			*init;
+	void			*win;
+	t_nfo			*nfo;
+	int				p;
+	int				x;
+	int				y;
+	double			cu;
+	int				size;
+	int				pxsize;
+}					t_env;
 /*
-** error.c
+** fdf.c
 */
 void	ft_error(char *str, char *str2);
+void	ft_exit(t_env *env);
 /*
 ** writeintab.c
 */
@@ -92,13 +93,34 @@ t_line	*ft_create_elem(void);
 t_lnu	*ft_create_lnu(void);
 t_lnu	*ft_createlnulist(int n);
 void	ft_free_all(t_infos *infos);
-void 	freeline(t_line *line);
+void	freeline(t_line *line);
 /*
 ** cout.c
 */
 int		ft_count_line(t_line *line);
 int		ft_tablen(char **tab);
-
-void 	display(t_nfo *nfo);
+/*
+** display.c
+*/
+void	display(t_nfo *nfo);
+int		ft_color(int z);
+void	ft_initseg(t_env *env, int x, int y, t_lnu *lnu);
+int		ft_printpixels(t_env *env);
+/*
+** displayseg.c
+*/
+void	ft_putpxl(t_env *env, int x, int y, int color);
+t_pts	*ft_putxy(double x1, double y1, double x2, double y2);
+void	ft_filla(t_pts *pts, double *a);
+int		ft_checkwin(t_env *env, t_pts *pts);
+void	ft_bresenham(t_env *env, t_pts *pts, int height);
+/*
+** movenscale.c
+*/
+void	ft_zoomnscale(t_env *env, int kc);
+int		ft_key_hook(int kc, t_env *env);
+void	ft_displaysize(t_env *env);
+void	ft_replay(t_env *env);
+void	ft_move(t_env *env, int kc);
 
 #endif

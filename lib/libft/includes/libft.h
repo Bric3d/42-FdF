@@ -71,5 +71,6 @@ void	ft_putstr_fd(char const *str, int fd);
 void	ft_putendl_fd(char const *str, int fd);
 void	ft_putnbr_fd(int n, int fd);
 char	*ft_itoa(int n);
+double  ft_abs(double n);
 
 #endif

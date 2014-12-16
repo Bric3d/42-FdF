@@ -25,7 +25,9 @@ TOMAKE =	$(F)count.c			\
 			$(F)createelem.c	\
 			$(F)get_next_line.c	\
 			$(F)readfile.c		\
-			$(F)display.c
+			$(F)display.c		\
+			$(F)displayseg.c	\
+			$(F)movenscale.c
 
 TOLIB	=	count.o				\
 			fdf.o				\
@@ -34,7 +36,9 @@ TOLIB	=	count.o				\
 			createelem.o		\
 			get_next_line.o		\
 			readfile.o			\
-			display.o
+			display.o			\
+			displayseg.o		\
+			movenscale.o
 
 all: $(NAME)
 

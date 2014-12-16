@@ -6,7 +6,7 @@
 /*   By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/08 14:13:06 by bbecker           #+#    #+#             */
-/*   Updated: 2014/12/08 14:26:49 by bbecker          ###   ########.fr       */
+/*   Updated: 2014/12/16 17:16:07 by bbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	ft_free_all(t_infos *infos)
 	free(infos);
 }
 
-void 	freeline(t_line *line)
+void	freeline(t_line *line)
 {
 	t_line *linetmp;
 
