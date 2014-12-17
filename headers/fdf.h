@@ -6,7 +6,7 @@
 /*   By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 11:13:14 by bbecker           #+#    #+#             */
-/*   Updated: 2014/12/16 18:25:37 by bbecker          ###   ########.fr       */
+/*   Updated: 2014/12/17 09:26:31 by bbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,60 +67,60 @@ typedef struct		s_env
 /*
 ** fdf.c
 */
-void	ft_error(char *str, char *str2);
-void	ft_exit(t_env *env);
+void				ft_error(char *str, char *str2);
+void				ft_exit(t_env *env);
 /*
 ** writeintab.c
 */
-int		*ft_strsplitnstuff(t_lnu *lnu, t_line *line);
-void	ft_write_total(int c, t_lnu *lnu);
-int		ft_writeintab(t_line *line, int **tab, t_lnu *lnu, int c);
-t_nfo	*ft_makeinttab(t_line *line);
+int					*ft_strsplitnstuff(t_lnu *lnu, t_line *line);
+void				ft_write_total(int c, t_lnu *lnu);
+int					ft_writeintab(t_line *line, int **tab, t_lnu *lnu, int c);
+t_nfo				*ft_makeinttab(t_line *line);
 /*
 ** readfile.c
 */
-t_nfo	*ft_read_file(int fd);
-int		ft_openfile(char *str);
+t_nfo				*ft_read_file(int fd);
+int					ft_openfile(char *str);
 /*
 ** printtab.c
 */
-void	ft_print_line(int *line, int ymax);
-void	ft_printinttab(t_nfo *nfo);
+void				ft_print_line(int *line, int ymax);
+void				ft_printinttab(t_nfo *nfo);
 /*
 ** createelem.c
 */
-t_line	*ft_create_elem(void);
-t_lnu	*ft_create_lnu(void);
-t_lnu	*ft_createlnulist(int n);
-void	ft_free_all(t_infos *infos);
-void	freeline(t_line *line);
+t_line				*ft_create_elem(void);
+t_lnu				*ft_create_lnu(void);
+t_lnu				*ft_createlnulist(int n);
+void				ft_free_all(t_infos *infos);
+void				freeline(t_line *line);
 /*
 ** cout.c
 */
-int		ft_count_line(t_line *line);
-int		ft_tablen(char **tab);
+int					ft_count_line(t_line *line);
+int					ft_tablen(char **tab);
 /*
 ** display.c
 */
-void	display(t_nfo *nfo);
-int		ft_color(int z);
-void	ft_initseg(t_env *env, int x, int y, t_lnu *lnu);
-int		ft_printpixels(t_env *env);
+void				display(t_nfo *nfo);
+int					ft_color(int z);
+void				ft_initseg(t_env *env, int x, int y, t_lnu *lnu);
+int					ft_printpixels(t_env *env);
 /*
 ** displayseg.c
 */
-void	ft_putpxl(t_env *env, int x, int y, int color);
-t_pts	*ft_putxy(double x1, double y1, double x2, double y2);
-void	ft_filla(t_pts *pts, double *a);
-int		ft_checkwin(t_env *env, t_pts *pts);
-void	ft_bresenham(t_env *env, t_pts *pts, int height);
+void				ft_putpxl(t_env *env, int x, int y, int color);
+t_pts				*ft_putxy(double x1, double y1, double x2, double y2);
+void				ft_filla(t_pts *pts, double *a);
+int					ft_checkwin(t_env *env, t_pts *pts);
+void				ft_bresenham(t_env *env, t_pts *pts, int height);
 /*
 ** movenscale.c
 */
-void	ft_zoomnscale(t_env *env, int kc);
-int		ft_key_hook(int kc, t_env *env);
-void	ft_displaysize(t_env *env);
-void	ft_replay(t_env *env);
-void	ft_move(t_env *env, int kc);
+void				ft_zoomnscale(t_env *env, int kc);
+int					ft_key_hook(int kc, t_env *env);
+void				ft_displaysize(t_env *env);
+void				ft_replay(t_env *env);
+void				ft_move(t_env *env, int kc);
 
 #endif
