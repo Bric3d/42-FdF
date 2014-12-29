@@ -123,4 +123,8 @@ void				ft_displaysize(t_env *env);
 void				ft_replay(t_env *env);
 void				ft_move(t_env *env, int kc);
 
+double	ft_calcy(t_env *env, int x, int y);
+double	ft_calcx(t_env *env, int x, int y);
+
+
 #endif

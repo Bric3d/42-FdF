@@ -56,9 +56,9 @@ void	ft_displaysize(t_env *env)
 	else
 		max = env->nfo->linenu;
 	env->p = 1000 / max;
-	env->x = env->p;
+	env->x = ft_calcx(env, env->nfo->linenu, 0);
 	env->y = env->p;
-	env->cu = 0.05;
+	env->cu = 0.2;
 	env->size = 1100;
 	env->pxsize = 1;
 }
