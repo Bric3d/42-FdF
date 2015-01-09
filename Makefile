@@ -6,7 +6,7 @@
 #    By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/08 15:08:34 by bbecker           #+#    #+#              #
-#    Updated: 2014/12/14 14:01:12 by bbecker          ###   ########.fr        #
+#    Updated: 2015/01/09 11:59:58 by bbecker          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ TOMAKE =	$(F)count.c			\
 			$(F)readfile.c		\
 			$(F)display.c		\
 			$(F)displayseg.c	\
+			$(F)initseg.c		\
 			$(F)movenscale.c
 
 TOLIB	=	count.o				\
@@ -38,6 +39,7 @@ TOLIB	=	count.o				\
 			readfile.o			\
 			display.o			\
 			displayseg.o		\
+			initseg.o			\
 			movenscale.o
 
 all: $(NAME)

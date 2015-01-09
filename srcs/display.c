@@ -6,7 +6,7 @@
 /*   By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/15 16:40:52 by bbecker           #+#    #+#             */
-/*   Updated: 2015/01/09 11:58:52 by bbecker          ###   ########.fr       */
+/*   Updated: 2015/01/09 14:02:28 by bbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	display(t_nfo *nfo)
 	env->nfo = nfo;
 	env->init = mlx_init();
 	ft_displaysize(env);
-	env->win = mlx_new_window(env->init, env->sizex, env->sizey, "FdF");
+	env->win = mlx_new_window(env->init, env->sizex, env->sizey, nfo->name);
 	mlx_hook(env->win, 1, 3, ft_key_hook, env);
 	mlx_key_hook(env->win, ft_key_hook, env);
 	mlx_expose_hook(env->win, ft_printpixels, env);

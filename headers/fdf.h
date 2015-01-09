@@ -6,7 +6,7 @@
 /*   By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 11:13:14 by bbecker           #+#    #+#             */
-/*   Updated: 2015/01/09 12:24:22 by bbecker          ###   ########.fr       */
+/*   Updated: 2015/01/09 14:02:51 by bbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef struct		s_nfo
 	t_lnu			*lnu;
 	int				maxcol;
 	int				linenu;
+	char			*name;
 }					t_nfo;
 
 typedef struct		s_pts

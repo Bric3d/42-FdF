@@ -6,7 +6,7 @@
 /*   By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/08 14:09:03 by bbecker           #+#    #+#             */
-/*   Updated: 2014/12/16 17:23:15 by bbecker          ###   ########.fr       */
+/*   Updated: 2015/01/09 15:08:52 by bbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,15 @@ int		main(int argc, char **argv)
 	int		fd;
 	t_nfo	*nfo;
 
-	if (argc > 1)
+	if (argc == 2)
 	{
 		fd = ft_openfile(argv[1]);
 		nfo = ft_read_file(fd);
+		nfo->name = ft_strdup(argv[1]);
 		display(nfo);
 	}
+	else
+		ft_putendl("FdF: usage: ./fdf map.fdf");
 	return (0);
 }
 
@@ -53,6 +56,7 @@ void	ft_exit(t_env *env)
 	while (i < env->nfo->linenu)
 		free(env->nfo->tab[i++]);
 	free(env->nfo->tab);
+	free(env->nfo->name);
 	free(env->nfo);
 	free(env->win);
 	free(env->init);
