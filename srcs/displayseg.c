@@ -6,7 +6,7 @@
 /*   By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/16 17:17:06 by bbecker           #+#    #+#             */
-/*   Updated: 2014/12/16 17:18:13 by bbecker          ###   ########.fr       */
+/*   Updated: 2015/01/09 11:48:25 by bbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_putpxl(t_env *env, int x, int y, int color)
 	ya = env->y + y;
 	xa = env->x + x;
 	z = 0;
-	if (ya <= env->size && xa <= env->size && ya >= 0 && xa >= 0)
+	if (ya <= env->sizey && xa <= env->sizex && ya >= 0 && xa >= 0)
 	{
 		while (z < env->pxsize)
 		{
@@ -62,13 +62,15 @@ int		ft_checkwin(t_env *env, t_pts *pts)
 {
 	int	ya;
 	int	xa;
-	int	size;
+	int	sizex;
+	int	sizey;
 
 	ya = env->y;
 	xa = env->x;
-	size = env->size;
-	if (pts->x1 + xa > size && pts->y1 + ya > size
-			&& pts->x2 + xa > size && pts->y2 + ya > size)
+	sizex = env->sizex;
+	sizey = env->sizey;
+	if (pts->x1 + xa > sizex && pts->y1 + ya > sizey
+			&& pts->x2 + xa > sizex && pts->y2 + ya > sizey)
 		return (0);
 	else if (pts->x1 + xa <= 0 && pts->y1 + ya <= 0
 			&& pts->x2 + xa <= 0 && pts->y2 + ya <= 0)
@@ -88,7 +90,7 @@ void	ft_bresenham(t_env *env, t_pts *pts, int height)
 	while (state == 1 && ft_checkwin(env, pts) == 1
 			&& !((int)pts->x1 == (int)pts->x2 && (int)pts->y1 == (int)pts->y2))
 	{
-		ft_putpxl(env, pts->x1, pts->y1, ft_color(height));
+		ft_putpxl(env, pts->x1, pts->y1, ft_color(height + env->z));
 		e2 = a[4];
 		state = 0;
 		if (e2 > (-a[0]) && (int)pts->x1 != (int)pts->x2)

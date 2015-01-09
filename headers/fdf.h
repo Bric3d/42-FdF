@@ -6,7 +6,7 @@
 /*   By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/03 11:13:14 by bbecker           #+#    #+#             */
-/*   Updated: 2014/12/17 09:26:31 by bbecker          ###   ########.fr       */
+/*   Updated: 2015/01/09 12:24:22 by bbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "libft.h"
 # include <stdlib.h>
 # include <fcntl.h>
+# include <math.h>
 # include <stdio.h>
 # include "get_next_line.h"
 
@@ -57,11 +58,13 @@ typedef struct		s_env
 	void			*init;
 	void			*win;
 	t_nfo			*nfo;
-	int				p;
+	double			p;
 	int				x;
 	int				y;
+	int				z;
 	double			cu;
-	int				size;
+	int				sizey;
+	int				sizex;
 	int				pxsize;
 }					t_env;
 /*
@@ -104,7 +107,6 @@ int					ft_tablen(char **tab);
 */
 void				display(t_nfo *nfo);
 int					ft_color(int z);
-void				ft_initseg(t_env *env, int x, int y, t_lnu *lnu);
 int					ft_printpixels(t_env *env);
 /*
 ** displayseg.c
@@ -115,6 +117,12 @@ void				ft_filla(t_pts *pts, double *a);
 int					ft_checkwin(t_env *env, t_pts *pts);
 void				ft_bresenham(t_env *env, t_pts *pts, int height);
 /*
+** initseg.c
+*/
+void				ft_initseg(t_env *env, int x, int y, t_lnu *lnu);
+double				ft_calcy(t_env *env, int x, int y);
+double				ft_calcx(t_env *env, int x, int y);
+/*
 ** movenscale.c
 */
 void				ft_zoomnscale(t_env *env, int kc);
@@ -122,9 +130,5 @@ int					ft_key_hook(int kc, t_env *env);
 void				ft_displaysize(t_env *env);
 void				ft_replay(t_env *env);
 void				ft_move(t_env *env, int kc);
-
-double	ft_calcy(t_env *env, int x, int y);
-double	ft_calcx(t_env *env, int x, int y);
-
 
 #endif

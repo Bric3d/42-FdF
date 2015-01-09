@@ -6,7 +6,7 @@
 /*   By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/16 17:19:44 by bbecker           #+#    #+#             */
-/*   Updated: 2014/12/16 17:24:49 by bbecker          ###   ########.fr       */
+/*   Updated: 2015/01/09 12:24:36 by bbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_zoomnscale(t_env *env, int kc)
 {
-	if (kc == 45 || kc == 65453)
+	if ((kc == 45 || kc == 65453) && env->p >= 1)
 		env->p--;
 	if (kc == 61 || kc == 65451)
 		env->p++;
@@ -24,6 +24,10 @@ void	ft_zoomnscale(t_env *env, int kc)
 		env->cu = env->cu - 0.001;
 	if (kc == 65360 && env->pxsize < env->p - 1)
 		env->pxsize++;
+	if (kc == 65455)
+		env->z = env->z - 1;
+	if (kc == 65450)
+		env->z = env->z + 1;
 }
 
 int		ft_key_hook(int kc, t_env *env)
@@ -32,7 +36,8 @@ int		ft_key_hook(int kc, t_env *env)
 		ft_exit (env);
 	if (kc == 45 || kc == 65453 || kc == 61 || kc == 65451 || kc == 65362
 			|| kc == 65364 || kc == 65361 || kc == 65363 || kc == 65365
-			|| kc == 65366 || kc == 65360 || kc == 65367 || kc == 114)
+			|| kc == 65366 || kc == 65360 || kc == 65367 || kc == 114
+			|| kc == 65455 || kc == 65450)
 	{
 		if (kc == 114)
 			ft_displaysize(env);
@@ -49,17 +54,20 @@ int		ft_key_hook(int kc, t_env *env)
 
 void	ft_displaysize(t_env *env)
 {
-	int	max;
+	double	max;
+	int		x;
+	t_nfo	*nfo;
 
-	if (env->nfo->maxcol > env->nfo->linenu)
-		max = env->nfo->maxcol;
-	else
-		max = env->nfo->linenu;
+	nfo = env->nfo;
+	x = nfo->maxcol * nfo->maxcol + nfo->linenu * nfo->linenu;
+	max = sqrt(x);
 	env->p = 1000 / max;
-	env->x = ft_calcx(env, env->nfo->linenu, 0);
+	env->x = ft_calcx(env, nfo->linenu, 0);
 	env->y = env->p;
+	env->z = 0;
 	env->cu = 0.2;
-	env->size = 1100;
+	env->sizey = 1100;
+	env->sizex = env->sizey + env->sizey / 2;
 	env->pxsize = 1;
 }
 

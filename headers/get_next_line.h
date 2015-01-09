@@ -6,7 +6,7 @@
 /*   By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/13 17:10:47 by bbecker           #+#    #+#             */
-/*   Updated: 2014/11/14 18:19:24 by bbecker          ###   ########.fr       */
+/*   Updated: 2015/01/09 12:24:58 by bbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/uio.h>
 # include <unistd.h>
 
-int	get_next_line(int const fd, char **line);
+int				get_next_line(int const fd, char **line);
 
 typedef struct	s_infos
 {
