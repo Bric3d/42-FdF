@@ -6,7 +6,7 @@
 /*   By: bbecker <bbecker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/08 14:21:36 by bbecker           #+#    #+#             */
-/*   Updated: 2014/12/08 14:37:47 by bbecker          ###   ########.fr       */
+/*   Updated: 2015/01/10 16:00:36 by bbecker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,10 @@ int		*ft_strsplitnstuff(t_lnu *lnu, t_line *line)
 		ft_error(NULL, "Malloc");
 		exit (-1);
 	}
-	while (tab[i++])
+	while (tab[i])
+	{
 		mapline[i] = ft_atoi(tab[i]);
+		i++;
+	}
 	return (mapline);
 }
