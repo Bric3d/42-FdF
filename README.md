@@ -8,3 +8,4 @@ COMMANDS :<br />
 - home and end to make the line larger<br />
 - page up and page down to make the elevation higher.<br />
 - / and * to change the "sea level"<br />
+- Ne marche qu'avec la minilibX Xquartz
